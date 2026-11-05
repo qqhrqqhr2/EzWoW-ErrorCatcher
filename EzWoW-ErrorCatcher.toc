@@ -1,4 +1,5 @@
 ## Interface: 16001
+## X-Curse-Project-ID: 1785737
 ## Title: EzWoW - Error Catcher
 ## Title-enUS: EzWoW - Error Catcher
 ## Title-koKR: EzWoW - Error Catcher
