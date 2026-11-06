@@ -104,10 +104,11 @@ end
 -- kind: "error" | "blocked" | "warning"
 local function record(kind, message, stack, locals, addon)
     message = clip(safeString(message) or "?", MAX_MESSAGE)
+    stack = stack and clip(safeString(stack), MAX_STACK) or nil
     local entry = {
         kind = kind,
         message = message,
-        stack = stack and clip(safeString(stack), MAX_STACK) or nil,
+        stack = stack,
         locals = locals and clip(safeString(locals), MAX_LOCALS) or nil,
         addon = addon or addonFromText(message) or addonFromText(stack) or "?",
         count = 1,
@@ -172,7 +173,7 @@ installHandler()
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_LOGIN")
-for _, event in ipairs({ "ADDON_ACTION_BLOCKED", "ADDON_ACTION_FORBIDDEN", "MACRO_ACTION_BLOCKED", "LUA_WARNING" }) do
+for _, event in ipairs({ "ADDON_ACTION_BLOCKED", "ADDON_ACTION_FORBIDDEN", "MACRO_ACTION_BLOCKED", "LUA_WARNING", "PLAYER_REGEN_ENABLED" }) do
     pcall(frame.RegisterEvent, frame, event)
 end
 
@@ -191,11 +192,16 @@ frame:SetScript("OnEvent", function(_, event, ...)
         if ns.RegisterBlizzardOptions then ns:RegisterBlizzardOptions() end
         return
     end
+    if event == "PLAYER_REGEN_ENABLED" then
+        if ns.FlushCombatNotice then ns.FlushCombatNotice() end
+        return
+    end
     if event == "LUA_WARNING" then
         local parts = {}
         for i = 1, select("#", ...) do
             local value = select(i, ...)
-            if type(value) == "string" then parts[#parts + 1] = value end
+            -- a secret string can't be joined: it is shown as a placeholder instead
+            if type(value) == "string" then parts[#parts + 1] = safeString(value) end
         end
         record("warning", table.concat(parts, " "), nil, nil)
         return
@@ -261,9 +267,19 @@ end
 -- Chat notice (one line per new error, at most every 5 seconds)
 -----------------------------------------------------------------------------
 local lastNotice, held = 0, 0
+local combatNotice        -- first new error seen in combat; printed when combat ends
 chatNotice = function(entry)
     if not entry or not ns.db or not ns.db.chatNotice then return end
     if entry.addon == ns.ADDON_NAME then return end
+    -- printing to chat in combat can taint the chat history: wait for combat to end
+    if type(InCombatLockdown) == "function" and InCombatLockdown() then
+        if combatNotice then
+            held = held + 1
+        else
+            combatNotice = entry
+        end
+        return
+    end
     local t = GetTime and GetTime() or 0
     if t - lastNotice < 5 then
         held = held + 1
@@ -276,3 +292,12 @@ chatNotice = function(entry)
     held = 0
     ns.Print(string.format(ns:L("notice"), entry.addon or "?", first) .. more)
 end
+
+local function flushCombatNotice()
+    local entry = combatNotice
+    if not entry then return end
+    combatNotice = nil
+    lastNotice = -5 -- the held notice is shown now, not throttled
+    chatNotice(entry)
+end
+ns.FlushCombatNotice = flushCombatNotice
