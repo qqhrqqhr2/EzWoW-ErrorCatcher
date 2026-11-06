@@ -1,11 +1,9 @@
-# v1.0.0
+# v1.0.1
 
 ### 한국어
-Lua 오류·애드온 동작 차단·경고를 모아 보여 주는 첫 버전입니다.
-- 오류 내용과 호출 순서를 복사할 수 있습니다.
-- 이전 접속의 오류도 날짜와 함께 볼 수 있습니다. (/ezerr)
+- 전투 중 발생한 오류 알림을 전투가 끝난 뒤 표시합니다.
+- 읽을 수 없는 값이 포함된 오류에서 나던 문제를 수정했습니다.
 
 ### English
-First release: collects Lua errors, blocked addon actions and warnings.
-- Copy the error text and stack in one click.
-- Errors from earlier sessions are kept with their date. (/ezerr)
+- Error notices from combat are now shown after combat.
+- Fixed a problem with errors that contain unreadable values.
