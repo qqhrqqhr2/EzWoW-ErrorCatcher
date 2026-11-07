@@ -156,6 +156,23 @@ local UI_STRINGS = {
     },
 }
 
+-- Issue reporter / "F6" bug line option
+for lang, texts in pairs({
+    koKR = { "이슈 리포터·F6 문구 숨김", "화면에 떠 있는 이슈 리포터 창과 툴팁 아래의 'F6 버그 제보' 안내 문구를 숨깁니다." },
+    enUS = { "Hide F6 bug report", "Hides the floating issue reporter frame and the 'Press F6 to submit a bug' line on tooltips." },
+    deDE = { "Fehlermelder & F6 ausblenden", "Blendet das schwebende Fehlermelder-Fenster und die Zeile 'F6 zum Melden eines Fehlers' in Tooltips aus." },
+    frFR = { "Masquer rapport & ligne F6", "Masque la fenêtre flottante de rapport de bug et la ligne « F6 pour signaler un bug » des infobulles." },
+    esES = { "Ocultar informes y línea F6", "Oculta la ventana flotante de informes de errores y la línea «F6 para informar de un error» en las descripciones." },
+    ruRU = { "Скрыть отчёт об ошибке и F6", "Скрывает плавающее окно отчёта об ошибке и строку «F6 — сообщить об ошибке» в подсказках." },
+    zhCN = { "隐藏问题报告与 F6 提示", "隐藏浮动的问题报告窗口和鼠标提示中的“按 F6 报告错误”一行。" },
+    zhTW = { "隱藏問題回報與 F6 提示", "隱藏浮動的問題回報視窗和滑鼠提示中的「按 F6 回報錯誤」一行。" },
+}) do
+    if UI_STRINGS[lang] then
+        UI_STRINGS[lang].opt_hideIssueReport = texts[1]
+        UI_STRINGS[lang].tip_hideIssueReport = texts[2]
+    end
+end
+
 function ns:GetActiveLang()
     local lang = (self.db and self.db.language) or "auto"
     if lang == "auto" then

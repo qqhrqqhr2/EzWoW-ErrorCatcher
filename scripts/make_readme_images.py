@@ -46,6 +46,9 @@ def read_locales(root):
     for code, lang in (("koKR", "ko"), ("enUS", "en")):
         block = re.search(r"\n    %s = \{(.*?)\n    \}," % code, src, re.S).group(1)
         out[lang] = {k: v for k, v in re.findall(r'(\w+) = "((?:[^"\\]|\\.)*)"', block)}
+        # issue reporter option: added per language after the main tables ({ label, tooltip })
+        m = re.search(r'\n    %s = \{ "((?:[^"\\]|\\.)*)", "((?:[^"\\]|\\.)*)" \}' % code, src)
+        out[lang]["opt_hideIssueReport"], out[lang]["tip_hideIssueReport"] = m.group(1), m.group(2)
     return out
 
 
@@ -114,7 +117,7 @@ T = {
             ("상세 칸", "애드온 · 종류 · 횟수 · 처음~마지막 시각, 그 아래 오류 내용 · 호출 순서 · 변수 값."),
             ("전체 선택 (복사)", "상세 내용을 모두 선택합니다. Ctrl + C로 복사. 이 오류 지우기."),
             ("필터", "EzWoW 애드온만, 이전 접속 포함(최근 300개까지 저장)."),
-            ("알림·아이콘", "채팅창 알림과 화면 아이콘을 켜고 끕니다."),
+            ("알림·아이콘·F6", "채팅창 알림, 화면 아이콘, 이슈 리포터 창과 툴팁의 'F6 버그 제보' 문구 숨김(기본 켬)을 켜고 끕니다."),
             ("아래 버튼", "모두 지우기 · 시험 오류 만들기(수집 확인용) · 언어(자동 + 8개 언어)."),
             ("채팅창 알림", "새 오류마다 한 줄, 5초에 한 번까지. 그 사이 생긴 오류 수를 덧붙입니다."),
             ("아이콘", "새 오류 수 배지. 클릭: 오류 창 · 끌기: 이동. 오류가 없으면 흐리게 표시."),
@@ -129,7 +132,7 @@ T = {
             ("Detail pane", "Addon · kind · count · first ~ last time, then the message, stack and locals."),
             ("Select all (copy)", "Selects the whole detail text; press Ctrl + C. Remove deletes the entry."),
             ("Filters", "EzWoW addons only, older sessions (the latest 300 are kept)."),
-            ("Notice · icon", "Turn the chat notice and the screen icon on or off."),
+            ("Notice · icon · F6", "Chat notice, screen icon, and hiding the issue reporter frame and the 'F6' bug line on tooltips (on by default)."),
             ("Bottom buttons", "Clear all · make a test error (checks the capture) · language (auto + 8 languages)."),
             ("Chat notice", "One line per new error, at most every 5 seconds, with the number held back meanwhile."),
             ("Icon", "Badge with the number of new errors. Click: error window · drag: move. Dimmed when there are none."),
@@ -238,12 +241,14 @@ def ui_page(lang, L, icon_uri, version, test_line):
             f'<span class="h">---- {esc(L["locals"])} ----</span>\n{esc(SEL_LOCALS)}')
     parts.append(f'<div class="detail" style="{at(left, 100)}width:{px(W - 12 - left)};height:{px(H - 76 - 100)}"><pre>{text}</pre></div>')
 
-    # option checks: BOTTOMLEFT x, 40 (24 x 24), label 4 px to the right
-    checks = [(12, "onlyEzWoW", False), (200, "showOlder", True), (388, "chatNotice", True), (576, "showIcon", True)]
+    # option checks: BOTTOMLEFT x, 40 (24 x 24), label 4 px to the right, 160 px apart
+    # (showOlder is off by default; it is on here so the list shows older sessions)
+    checks = [(12, "onlyEzWoW", False), (172, "showOlder", True), (332, "chatNotice", True), (492, "showIcon", True),
+              (652, "hideIssueReport", True)]
     for x, key, on in checks:
         y = H - 40 - 24
         parts.append(f'<div class="check{" on" if on else ""}" style="{at(x, y)}"><i></i></div>')
-        parts.append(f'<div class="lbl" style="{at(x + 28, y + 3)}max-width:{px(150)};overflow:hidden">{esc(L["opt_" + key])}</div>')
+        parts.append(f'<div class="lbl" style="{at(x + 28, y + 3)}">{esc(L["opt_" + key])}</div>')
 
     # bottom buttons
     by = H - 10 - 24
@@ -290,7 +295,7 @@ def ui_page(lang, L, icon_uri, version, test_line):
         (rx, cy(250)),                                         # 2 detail
         (rx, cy(82)),                                          # 3 select all
         (cx(0) - 26, cy(H - 52)),                              # 4 filters
-        (cx(388) - 20, cy(H - 52)),                            # 5 notice / icon checks
+        (cx(332) - 20, cy(H - 52)),                            # 5 notice / icon / issue reporter checks
         (cx(0) - 26, cy(H - 22)),                              # 6 bottom buttons
         (ox - 26, sy + 38),                                    # 7 chat
         (ox + lx + 32 * SCALE + 34, sy + ly + 14),             # 8 icon

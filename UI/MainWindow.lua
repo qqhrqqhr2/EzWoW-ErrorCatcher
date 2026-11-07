@@ -231,10 +231,21 @@ local function buildWindow()
     end
     window.checks = {
         check(12, "onlyEzWoW"),
-        check(200, "showOlder"),
-        check(388, "chatNotice"),
-        check(576, "showIcon", function(value) ns.SetLauncherShown(value) end),
+        check(172, "showOlder"),
+        check(332, "chatNotice"),
+        check(492, "showIcon", function(value) ns.SetLauncherShown(value) end),
+        check(652, "hideIssueReport", function() if ns.UpdateIssueReportState then ns.UpdateIssueReportState() end end),
     }
+    -- the issue reporter option explains itself on hover
+    local issueCheck = window.checks[5].check
+    issueCheck:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_TOP")
+        local accent = S().accent
+        GameTooltip:AddLine(ns:L("opt_hideIssueReport"), accent[1], accent[2], accent[3])
+        GameTooltip:AddLine(ns:L("tip_hideIssueReport"), 0.929, 0.957, 0.969, true)
+        GameTooltip:Show()
+    end)
+    issueCheck:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
     window.clearBtn = UIKit:CreateButton(window, 130, 24, "", false, "GameFontHighlightSmall")
     window.clearBtn:SetPoint("BOTTOMLEFT", 12, 10)
@@ -301,7 +312,7 @@ function ns.RefreshWindow()
 
     for _, item in ipairs(window.checks) do
         item.check:SetChecked(ns.db[item.key] and true or false)
-        ns.FitText(item.label, ns:L("opt_" .. item.key), 150, 12, 9)
+        ns.FitText(item.label, ns:L("opt_" .. item.key), 128, 12, 9)
     end
     window.clearBtn:SetLabel(ns:L("clearAll"))
     window.testBtn:SetLabel(ns:L("test"))

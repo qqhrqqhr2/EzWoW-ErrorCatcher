@@ -18,6 +18,7 @@ Collects Lua errors, blocked addon actions and warnings in a window you can copy
 - EzWoW 애드온만 보기, 이전 접속 포함, 채팅창 알림·아이콘 켜고 끄기, 시험 오류 만들기, 언어(자동 + 8개 언어).
 - 최근 오류 300개까지 저장합니다. 오류 내용 1000자, 호출 순서 4000자, 변수 값 2000자를 넘으면 잘라서 저장합니다.
 - 게임의 기본 오류 처리는 그대로 두고 그 앞에서 기록만 합니다.
+- **이슈 리포터·F6 문구 숨김**(기본 켬): 화면에 떠 있는 게임의 이슈 리포터 창과 툴팁 아래의 'F6 버그 제보' 안내 문구를 숨깁니다. 끄면 바로 다시 보입니다. 원래 EzWoW - Tooltip의 설정이었으며, 처음 실행할 때 Tooltip에서 고른 값을 한 번 가져옵니다(Tooltip은 Error Catcher가 없을 때만 이 기능을 씁니다).
 - `/ezerr icon`: 아이콘을 다시 켜고 처음 위치로 옮깁니다. 아이콘은 끌어서 옮길 수 있습니다.
 
 ## English
@@ -33,4 +34,5 @@ Collects Lua errors, blocked addon actions and warnings in a window you can copy
 - EzWoW addons only, older sessions, chat notice and icon on/off, a test error, and language (auto + 8 languages).
 - The latest 300 errors are kept. Messages over 1000 characters, stacks over 4000 and locals over 2000 are cut when saved.
 - The game's own error handling still runs; errors are only recorded on the way.
+- **Hide F6 bug report** (on by default): hides the game's floating issue reporter frame and the "Press F6 to submit a bug" line on tooltips. Turning it off shows them again right away. This used to be an EzWoW - Tooltip option; the choice made there is carried over once on the first start (Tooltip only does this itself when Error Catcher is not installed).
 - `/ezerr icon` shows the icon again at its default spot. Drag the icon to move it.

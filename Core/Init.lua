@@ -39,6 +39,7 @@ ns.DEFAULTS = {
     showIcon    = true,
     onlyEzWoW   = false,
     showOlder   = false,
+    hideIssueReport = true,   -- issue reporter frame and the "F6" bug line on tooltips
     frames      = {},
 }
 
