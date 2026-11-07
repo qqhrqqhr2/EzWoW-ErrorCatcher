@@ -209,6 +209,13 @@ frame:SetScript("OnEvent", function(_, event, ...)
     -- ADDON_ACTION_BLOCKED / FORBIDDEN / MACRO_ACTION_BLOCKED: (addonName, functionName)
     -- no stack here: it would only be this event handler's own stack
     local addonName, functionName = ...
+    -- the map's own pins made while an addon opens or moves the map in combat
+    -- can't set their right-click pass-through; nothing else is affected
+    local fn = safeString(functionName)
+    if event == "ADDON_ACTION_BLOCKED" and type(fn) == "string"
+        and (fn:find("SetPassThroughButtons", 1, true) or fn:find("SetPropagateMouseClicks", 1, true)) then
+        return
+    end
     local text = string.format("[%s] %s: %s()", event, safeString(addonName) or "?", safeString(functionName) or "?")
     record("blocked", text, nil, nil, safeString(addonName))
 end)
