@@ -21,7 +21,7 @@
 ## Notes-zhCN: 在可复制的窗口中收集 Lua 错误、被阻止的插件动作和警告。(/ezerr)
 ## Notes-zhTW: 在可複製的視窗中收集 Lua 錯誤、被阻止的插件動作和警告。(/ezerr)
 ## Author: qqhrqqhr2
-## Version: 1.0.1
+## Version: 1.0.2
 ## Category: EzWoW
 ## IconTexture: Interface\AddOns\EzWoW-ErrorCatcher\Media\Icon
 ## SavedVariables: EzWoW_ErrorCatcherDB, EzWoW_ErrorCatcherLog

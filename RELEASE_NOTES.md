@@ -1,9 +1,9 @@
-# v1.0.1
+# v1.0.2
 
 ### 한국어
-- 전투 중 발생한 오류 알림을 전투가 끝난 뒤 표시합니다.
-- 읽을 수 없는 값이 포함된 오류에서 나던 문제를 수정했습니다.
+- 화면에 떠 있는 이슈 리포터 창과 툴팁 아래의 "F6 버그 제보" 안내 문구를 숨기는 옵션을 추가했습니다(기본 켜짐).
+- 옵션에 마우스를 올리면 설명이 표시됩니다.
 
 ### English
-- Error notices from combat are now shown after combat.
-- Fixed a problem with errors that contain unreadable values.
+- Added an option to hide the floating issue reporter frame and the "Press F6 to submit a bug" line on tooltips (on by default).
+- Hovering the option shows a description.
