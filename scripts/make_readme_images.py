@@ -119,7 +119,7 @@ T = {
             ("필터", "EzWoW 애드온만, 이전 접속 포함(최근 300개까지 저장)."),
             ("알림·아이콘·F6", "채팅창 알림, 화면 아이콘, 이슈 리포터 창과 툴팁의 'F6 버그 제보' 문구 숨김(기본 켬)을 켜고 끕니다."),
             ("아래 버튼", "모두 지우기 · 시험 오류 만들기(수집 확인용) · 언어(자동 + 8개 언어)."),
-            ("채팅창 알림", "새 오류마다 한 줄, 5초에 한 번까지. 그 사이 생긴 오류 수를 덧붙입니다."),
+            ("채팅창 알림", "새 오류마다 한 줄, 5초에 한 번까지. 그 사이 생긴 오류 수를 덧붙이고, 전투 중 오류는 전투가 끝난 뒤 알립니다."),
             ("아이콘", "새 오류 수 배지. 클릭: 오류 창 · 끌기: 이동. 오류가 없으면 흐리게 표시."),
         ],
         "foot": "애드온 코드의 창 크기·좌표·색상·문구로 재현한 예시 화면입니다. 오류 내용과 애드온 이름(MyAddon 등)은 예시입니다.",
@@ -134,7 +134,7 @@ T = {
             ("Filters", "EzWoW addons only, older sessions (the latest 300 are kept)."),
             ("Notice · icon · F6", "Chat notice, screen icon, and hiding the issue reporter frame and the 'F6' bug line on tooltips (on by default)."),
             ("Bottom buttons", "Clear all · make a test error (checks the capture) · language (auto + 8 languages)."),
-            ("Chat notice", "One line per new error, at most every 5 seconds, with the number held back meanwhile."),
+            ("Chat notice", "One line per new error, at most every 5 seconds, with the number held back meanwhile. Errors in combat are announced after combat."),
             ("Icon", "Badge with the number of new errors. Click: error window · drag: move. Dimmed when there are none."),
         ],
         "foot": "Mock-up rebuilt from the window sizes, coordinates, colours and strings in the addon code. Errors and addon names (MyAddon etc.) are examples.",
@@ -337,7 +337,7 @@ def main(root: Path):
         html_path = tmp / f"ui_{lang}.html"
         html_path.write_text(page, encoding="utf-8")
         png = out / f"ui_{lang}.png"
-        render(html_path, png, h, tmp / "chrome_profile")
+        render(html_path, png, h, tmp / f"chrome_profile_{lang}")
         print("wrote", png, h)
 
 

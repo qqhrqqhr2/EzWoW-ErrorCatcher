@@ -17,6 +17,7 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 
 ### Error window
 - Lua errors (coral), blocked addon actions and warnings (gold) in one list.
+- Harmless notices about map icon right-click settings being blocked when a map is opened or moved in combat are skipped.
 - Repeated errors are grouped into one row with a count (x12) and the last time; errors from older sessions show the date too.
 - The detail pane shows the addon, kind, count, first and last time, then the message, the stack and the local values.
 - **Select all (copy)**, then Ctrl + C to copy everything; **Remove** deletes one entry, **Clear all** deletes them all.
@@ -25,7 +26,9 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 
 ### Notices
 - A one-line chat notice when something breaks (at most every 5 seconds, with the number held back meanwhile).
-- A small screen icon with a badge for new errors. Click to open the window, drag to move it.
+- Errors in combat are announced once combat ends, so the chat is left alone while fighting.
+- A small screen icon with a badge for new errors (dimmed while there are none). Click to open the window, drag to move it.
+- The window can also be opened from the game's Settings > AddOns.
 
 ### Hide F6 bug report (on by default)
 - Hides the game's floating issue reporter frame and the "Press F6 to submit a bug" line at the bottom of tooltips.
@@ -39,7 +42,7 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 - The issue reporter option moved here from **EzWoW - Tooltip**. The choice made there is carried over once on the first start.
 
 ## Commands
-- `/ezerr` or `/오류` — open the error window
+- `/ezerr`, `/오류` or `/ezwowerrors` — open the error window
 - `/ezerr test` — make a test error
 - `/ezerr clear` — clear all saved errors
 - `/ezerr icon` — show the icon again at its default spot
@@ -60,6 +63,7 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 
 ### 오류 창
 - Lua 오류(코랄)와 애드온 동작 차단·경고(노랑)를 한 목록에 모읍니다.
+- 전투 중 지도를 열거나 옮길 때 지도 아이콘의 우클릭 설정이 막혔다는 무해한 알림은 모으지 않습니다.
 - 같은 오류는 한 줄로 묶어 횟수(x12)와 마지막 시각을 보여 주고, 이전 접속 오류는 날짜까지 표시합니다.
 - 상세 칸에 애드온·종류·횟수·처음~마지막 시각과 오류 내용·호출 순서·변수 값이 나옵니다.
 - **전체 선택 (복사)** 후 Ctrl + C로 복사합니다. **이 오류 지우기**로 하나, **모두 지우기**로 전부 지웁니다.
@@ -68,7 +72,9 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 
 ### 알림
 - 오류가 나면 채팅창에 한 줄 알림(5초에 한 번까지, 그 사이 생긴 수를 덧붙임).
-- 새 오류 수 배지가 붙은 화면 아이콘. 클릭하면 오류 창, 끌면 이동.
+- 전투 중에 난 오류는 채팅창을 건드리지 않도록 전투가 끝난 뒤 알립니다.
+- 새 오류 수 배지가 붙은 화면 아이콘(오류가 없으면 흐리게). 클릭하면 오류 창, 끌면 이동.
+- 게임 설정 > 애드온에서도 오류 창을 열 수 있습니다.
 
 ### 이슈 리포터·F6 문구 숨김 (기본 켬)
 - 화면에 떠 있는 게임의 이슈 리포터 창과 툴팁 아래의 'F6 버그 제보' 안내 문구를 숨깁니다.
@@ -82,9 +88,10 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 - 이슈 리포터 숨김 설정은 **EzWoW - Tooltip**에서 이 애드온으로 옮겨 왔습니다. 처음 실행할 때 Tooltip에서 고른 값을 한 번 가져옵니다.
 
 ## 명령어
-- `/ezerr` 또는 `/오류` — 오류 창 열기
+- `/ezerr`, `/오류` 또는 `/ezwowerrors` — 오류 창 열기
 - `/ezerr test` — 시험 오류 만들기
 - `/ezerr clear` — 저장된 오류 모두 지우기
 - `/ezerr icon` — 아이콘을 다시 켜고 처음 위치로
+- 하위 명령은 한국어로도 됩니다: `/오류 테스트`, `/오류 지우기`, `/오류 아이콘`
 
 지원 언어: English, 한국어, Deutsch, Français, Español, Русский, 简体中文, 繁體中文.
