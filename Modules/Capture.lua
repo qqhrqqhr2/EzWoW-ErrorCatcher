@@ -144,7 +144,11 @@ local function errorHandler(message, ...)
     -- the flag stays set while the other handlers run, so a way back to us ends above
     if outerHandler then pcall(outerHandler, message, ...) end
     local result
-    if previousHandler then
+    -- With the gamepad UI on, the game's own error window is left out: run
+    -- from here (addon code) it opens tainted, the game's gamepad navigation
+    -- is then blocked and stops answering. This addon shows the error instead.
+    local padUI = ns.GamePad and ns.GamePad.IsActive and ns.GamePad.IsActive()
+    if previousHandler and not padUI then
         local ok, value = pcall(previousHandler, message, ...)
         if ok then result = value end
     end
