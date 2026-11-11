@@ -113,3 +113,9 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 - 하위 명령은 한국어로도 됩니다: `/오류 테스트`, `/오류 지우기`, `/오류 아이콘`
 
 지원 언어: English, 한국어, Deutsch, Français, Español, Русский, 简体中文, 繁體中文.
+
+---
+
+**Support:** If you find this addon useful, you can support its development. [Buy Me a Coffee ☕](https://buymeacoffee.com/qqhrqqhr2)
+
+**후원:** 애드온이 도움이 되셨다면 개발 후원으로 응원해 주세요. [Buy Me a Coffee ☕](https://buymeacoffee.com/qqhrqqhr2)
