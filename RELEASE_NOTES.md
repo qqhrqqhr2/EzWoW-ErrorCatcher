@@ -1,7 +1,7 @@
-# v1.0.6
+# v1.0.7
 
 ### 한국어
-- 다른 EzWoW 사용자와 기록을 주고받는 공유 기능이 동작하지 않던 문제를 수정했습니다.
+- 지도 핀의 동작 차단 경고와 오류 수집기 자체의 오류도 이제 알림으로 보여 줍니다.
 
 ### English
-- Fixed data sharing with other EzWoW users not working.
+- Blocked-action warnings from map pins and errors from the catcher itself are now shown too.

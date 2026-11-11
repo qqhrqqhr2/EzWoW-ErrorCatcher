@@ -22,7 +22,7 @@
 ## Notes-zhTW: 在可複製的視窗中收集 Lua 錯誤、被阻止的插件動作和警告。(/ezerr)
 ## X-License: GPL-3.0
 ## Author: qqhrqqhr2
-## Version: 1.0.6
+## Version: 1.0.7
 ## Category: EzWoW
 ## IconTexture: Interface\AddOns\EzWoW-ErrorCatcher\Media\Icon
 ## SavedVariables: EzWoW_ErrorCatcherDB, EzWoW_ErrorCatcherLog, EzWoW_SharedData
