@@ -1,7 +1,7 @@
-# v1.0.7
+# v1.0.8
 
 ### 한국어
-- 지도 핀의 동작 차단 경고와 오류 수집기 자체의 오류도 이제 알림으로 보여 줍니다.
+- 다른 EzWoW 사용자와 기록을 주고받을 때, 귓속말이 닿지 않는 사람에게 같은 기록을 반복해서 보내지 않습니다. 그 사람이 다시 접속하면 바로 다시 주고받습니다.
 
 ### English
-- Blocked-action warnings from map pins and errors from the catcher itself are now shown too.
+- Record sharing with other EzWoW users no longer keeps whispering players it cannot reach; it picks them up again as soon as they come back online.
