@@ -200,9 +200,12 @@ local function buildWindow()
 
     -- detail
     local left = 12 + LIST_WIDTH + 10
+    -- the info line (addon · kind · count · first ~ last time) has its own row under the buttons
     window.info = window:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-    window.info:SetPoint("TOPLEFT", left + 2, -76)
+    window.info:SetPoint("TOPLEFT", left + 2, -102)
+    window.info:SetPoint("RIGHT", window, "RIGHT", -12, 0)
     window.info:SetJustifyH("LEFT")
+    window.info:SetWordWrap(false)
     window.info:SetTextColor(rgba(S().textMuted))
     window.copyBtn = UIKit:CreateButton(window, 120, 24, "", true, "GameFontHighlightSmall")
     window.copyBtn:SetPoint("TOPRIGHT", -12, -70)
@@ -211,12 +214,15 @@ local function buildWindow()
     window.removeBtn:SetPoint("RIGHT", window.copyBtn, "LEFT", -6, 0)
     window.removeBtn:SetScript("OnClick", function()
         if selected then
-            ns.RemoveEntry(selected)
+            -- clear the selection first: removing refreshes the window at once, and that
+            -- refresh picks the next entry (clearing after it would undo that pick)
+            local entry = selected
             selected = nil
+            ns.RemoveEntry(entry)
         end
     end)
     window.detail = createDetail(window)
-    window.detail:SetPoint("TOPLEFT", left, -100)
+    window.detail:SetPoint("TOPLEFT", left, -120)
     window.detail:SetPoint("BOTTOMRIGHT", -12, 76)
 
     -- options row

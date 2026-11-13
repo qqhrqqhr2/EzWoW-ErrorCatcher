@@ -17,7 +17,6 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 
 ### Error window
 - Lua errors (coral), blocked addon actions and warnings (gold) in one list.
-- Harmless notices about map icon right-click settings being blocked when a map is opened or moved in combat are skipped.
 - Repeated errors are grouped into one row with a count (x12) and the last time; errors from older sessions show the date too.
 - The detail pane shows the addon, kind, count, first and last time, then the message, the stack and the local values.
 - **Select all (copy)**, then Ctrl + C to copy everything; **Remove** deletes one entry, **Clear all** deletes them all.
@@ -73,7 +72,6 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 
 ### 오류 창
 - Lua 오류(코랄)와 애드온 동작 차단·경고(노랑)를 한 목록에 모읍니다.
-- 전투 중 지도를 열거나 옮길 때 지도 아이콘의 우클릭 설정이 막혔다는 무해한 알림은 모으지 않습니다.
 - 같은 오류는 한 줄로 묶어 횟수(x12)와 마지막 시각을 보여 주고, 이전 접속 오류는 날짜까지 표시합니다.
 - 상세 칸에 애드온·종류·횟수·처음~마지막 시각과 오류 내용·호출 순서·변수 값이 나옵니다.
 - **전체 선택 (복사)** 후 Ctrl + C로 복사합니다. **이 오류 지우기**로 하나, **모두 지우기**로 전부 지웁니다.

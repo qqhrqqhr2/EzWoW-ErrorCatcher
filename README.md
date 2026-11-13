@@ -14,7 +14,7 @@ Collects Lua errors, blocked addon actions and warnings in a window you can copy
 - 오류가 나면 채팅창에 한 줄 알림(5초에 한 번까지, 그 사이 생긴 수를 덧붙임)이 뜨고, 아이콘에 새 오류 수가 표시됩니다. 전투 중에 난 오류는 채팅창을 건드리지 않도록 전투가 끝난 뒤 알립니다.
 - 같은 오류는 한 줄로 묶어 횟수(x12)와 마지막 시각을 보여 줍니다. 이전 접속 오류는 날짜까지 표시합니다(`11/05 22:41:10`).
 - 오른쪽 상세 칸에 처음~마지막 시각, 오류 내용·호출 순서·변수 값이 나오며 **전체 선택 (복사)** 후 Ctrl + C로 복사합니다.
-- 애드온 동작 차단과 경고도 함께 모읍니다(노란색). 전투 중 지도를 열거나 옮길 때 지도 아이콘의 우클릭 설정이 막혔다는 무해한 알림은 모으지 않습니다.
+- 애드온 동작 차단과 경고도 함께 모읍니다(노란색).
 - EzWoW 애드온만 보기, 이전 접속 포함, 채팅창 알림·아이콘 켜고 끄기, 시험 오류 만들기, 언어(자동 + 8개 언어).
 - 최근 오류 300개까지 저장합니다. 오류 내용 1000자, 호출 순서 4000자, 변수 값 2000자를 넘으면 잘라서 저장합니다.
 - 게임의 기본 오류 처리는 그대로 두고 그 앞에서 기록만 합니다.
@@ -42,7 +42,7 @@ Collects Lua errors, blocked addon actions and warnings in a window you can copy
 - A one-line chat notice (at most every 5 seconds, with the number held back meanwhile) and a counter on the icon when something breaks. Errors in combat are announced once combat ends, so the chat is left alone while fighting.
 - Repeated errors are grouped with a count (x12) and the last time. Errors from older sessions also show the date (`11/05 22:41:10`).
 - The detail pane shows the first ~ last time, the message, stack and locals; **Select all (copy)**, then Ctrl + C.
-- Blocked addon actions and warnings are collected too (gold). Harmless notices about map icon right-click settings being blocked when a map is opened or moved in combat are skipped.
+- Blocked addon actions and warnings are collected too (gold).
 - EzWoW addons only, older sessions, chat notice and icon on/off, a test error, and language (auto + 8 languages).
 - The latest 300 errors are kept. Messages over 1000 characters, stacks over 4000 and locals over 2000 are cut when saved.
 - The game's own error handling still runs; errors are only recorded on the way.

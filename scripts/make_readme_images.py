@@ -86,7 +86,7 @@ def sample_entries(L, test_line):
         ("MyRaidFrames", "error", 46, p + "MyRaidFrames/Auras.lua:57: attempt to compare number with nil",
          "20:58:02", "21:07:45", False),
         ("MyMinimap", "warning", 1, "Couldn't open " + p + "MyMinimap/Media/Border.tga", "20:57:30", "20:57:30", False),
-        ("MyQuestHelper", "error", 2, p + "MyQuestHelper/Quests.lua:88: bad argument #1 to 'pairs' (table expected, got nil)",
+        ("MyQuestNotes", "error", 2, p + "MyQuestNotes/Quests.lua:88: bad argument #1 to 'pairs' (table expected, got nil)",
          "20:57:41", "20:57:44", False),
         ("MyAddon", "error", 1, p + "MyAddon/Options.lua:23: attempt to call global 'GetItemInfo' (a nil value)",
          "11/05 22:41:10", "11/05 22:41:10", True),
