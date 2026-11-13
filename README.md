@@ -37,7 +37,7 @@ Collects Lua errors, blocked addon actions and warnings in a window you can copy
 
 ![Error window](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-ErrorCatcher/master/docs/images/ui_en.png)
 
-> In-game screenshots (WoW Forever, Korean client). Character and player names and chat text are blurred.
+> In-game screenshots with the addon set to English. The game client is Korean, so game text such as zone, item and spell names stays Korean. Character and player names and chat text are blurred.
 
 - A one-line chat notice (at most every 5 seconds, with the number held back meanwhile) and a counter on the icon when something breaks. Errors in combat are announced once combat ends, so the chat is left alone while fighting.
 - Repeated errors are grouped with a count (x12) and the last time. Errors from older sessions also show the date (`11/05 22:41:10`).
