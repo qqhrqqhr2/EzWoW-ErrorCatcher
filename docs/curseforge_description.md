@@ -11,7 +11,7 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 
 ![Error window](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-ErrorCatcher/master/docs/images/ui_en.png)
 
-*Mock-up rebuilt from the window sizes, coordinates, colours and strings in the addon code. Errors and addon names (MyAddon etc.) are examples.*
+*In-game screenshots (WoW Forever, Korean client). Character and player names and chat text are blurred.*
 
 ## Features
 
@@ -23,6 +23,7 @@ An error window for WoW Forever. Lua errors, blocked addon actions and warnings 
 - **Select all (copy)**, then Ctrl + C to copy everything; **Remove** deletes one entry, **Clear all** deletes them all.
 - Filters: EzWoW addons only, include older sessions. The latest 300 errors are kept.
 - **Make a test error** to check that capturing works.
+- While the gamepad UI is on, errors go only to this window instead of the game's error popup, so pad control never gets stuck.
 
 ### Notices
 - A one-line chat notice when something breaks (at most every 5 seconds, with the number held back meanwhile).
@@ -66,7 +67,7 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 
 ![오류 창](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-ErrorCatcher/master/docs/images/ui_ko.png)
 
-*애드온 코드의 창 크기·좌표·색상·문구로 재현한 예시 화면입니다. 오류 내용과 애드온 이름(MyAddon 등)은 예시입니다.*
+*실제 게임 화면입니다(WoW Forever, 한국어 클라이언트). 캐릭터 · 다른 플레이어 이름과 채팅 내용은 가렸습니다.*
 
 ## 기능
 
@@ -78,6 +79,7 @@ WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고�
 - **전체 선택 (복사)** 후 Ctrl + C로 복사합니다. **이 오류 지우기**로 하나, **모두 지우기**로 전부 지웁니다.
 - 필터: EzWoW 애드온만, 이전 접속 포함. 최근 오류 300개까지 저장합니다.
 - **시험 오류 만들기**로 수집이 되는지 확인할 수 있습니다.
+- 게임패드 UI를 쓰는 중에는 게임 기본 오류 창 대신 이 창에만 모읍니다. 오류 창 때문에 패드 조작이 멈추지 않습니다.
 
 ### 알림
 - 오류가 나면 채팅창에 한 줄 알림(5초에 한 번까지, 그 사이 생긴 수를 덧붙임).
