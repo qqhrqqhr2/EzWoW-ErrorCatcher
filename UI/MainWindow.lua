@@ -161,6 +161,8 @@ end
 -----------------------------------------------------------------------------
 local function buildWindow()
     window = CreateFrame("Frame", "EzWoWErrorCatcherMain", UIParent, "BackdropTemplate")
+    -- (taller than the screen: shrunk to fit, Libs/EzWoWGamePad)
+    if ns.GamePad and ns.GamePad.KeepOnScreen then ns.GamePad.KeepOnScreen(window) end
     window:SetSize(WIDTH, HEIGHT)
     local pos = ns.db.frames.main
     if type(pos) == "table" and pos[1] then
