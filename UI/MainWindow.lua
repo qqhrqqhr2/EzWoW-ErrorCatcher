@@ -37,6 +37,9 @@ local function fullText(entry)
     if entry.locals and entry.locals ~= "" then
         parts[#parts + 1] = "\n---- " .. ns:L("locals") .. " ----\n" .. entry.locals
     end
+    if entry.context and entry.context ~= "" then
+        parts[#parts + 1] = "\n---- " .. ns:L("context") .. " ----\n" .. entry.context
+    end
     return table.concat(parts, "\n")
 end
 

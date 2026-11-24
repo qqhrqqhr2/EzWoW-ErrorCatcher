@@ -21,7 +21,7 @@ local UI_STRINGS = {
     koKR = {
         subtitle = "이번 접속 오류 %d개 · 저장된 오류 %d개",
         empty = "오류가 없습니다.",
-        stack = "호출 순서", locals = "변수 값",
+        stack = "호출 순서", locals = "변수 값", context = "당시 상황",
         kind_error = "Lua 오류", kind_blocked = "동작 차단", kind_warning = "경고",
         selectAll = "전체 선택 (복사)", remove = "이 오류 지우기",
         opt_onlyEzWoW = "EzWoW 애드온만", opt_showOlder = "이전 접속 포함",
@@ -38,7 +38,7 @@ local UI_STRINGS = {
     enUS = {
         subtitle = "%d errors this session · %d saved",
         empty = "No errors.",
-        stack = "Stack", locals = "Locals",
+        stack = "Stack", locals = "Locals", context = "Situation",
         kind_error = "Lua error", kind_blocked = "Blocked action", kind_warning = "Warning",
         selectAll = "Select all (copy)", remove = "Remove",
         opt_onlyEzWoW = "EzWoW addons only", opt_showOlder = "Older sessions",
@@ -55,7 +55,7 @@ local UI_STRINGS = {
     deDE = {
         subtitle = "%d Fehler in dieser Sitzung · %d gespeichert",
         empty = "Keine Fehler.",
-        stack = "Aufrufliste", locals = "Variablen",
+        stack = "Aufrufliste", locals = "Variablen", context = "Situation",
         kind_error = "Lua-Fehler", kind_blocked = "Aktion blockiert", kind_warning = "Warnung",
         selectAll = "Alles markieren (kopieren)", remove = "Entfernen",
         opt_onlyEzWoW = "Nur EzWoW-Addons", opt_showOlder = "Frühere Sitzungen",
@@ -72,7 +72,7 @@ local UI_STRINGS = {
     frFR = {
         subtitle = "%d erreurs cette session · %d enregistrées",
         empty = "Aucune erreur.",
-        stack = "Pile d'appels", locals = "Variables",
+        stack = "Pile d'appels", locals = "Variables", context = "Contexte",
         kind_error = "Erreur Lua", kind_blocked = "Action bloquée", kind_warning = "Avertissement",
         selectAll = "Tout sélectionner (copier)", remove = "Supprimer",
         opt_onlyEzWoW = "Addons EzWoW seulement", opt_showOlder = "Sessions précédentes",
@@ -89,7 +89,7 @@ local UI_STRINGS = {
     esES = {
         subtitle = "%d errores en esta sesión · %d guardados",
         empty = "No hay errores.",
-        stack = "Pila de llamadas", locals = "Variables",
+        stack = "Pila de llamadas", locals = "Variables", context = "Contexto",
         kind_error = "Error de Lua", kind_blocked = "Acción bloqueada", kind_warning = "Aviso",
         selectAll = "Seleccionar todo (copiar)", remove = "Quitar",
         opt_onlyEzWoW = "Solo addons EzWoW", opt_showOlder = "Sesiones anteriores",
@@ -106,7 +106,7 @@ local UI_STRINGS = {
     ruRU = {
         subtitle = "Ошибок за сеанс: %d · сохранено: %d",
         empty = "Ошибок нет.",
-        stack = "Стек вызовов", locals = "Переменные",
+        stack = "Стек вызовов", locals = "Переменные", context = "Обстановка",
         kind_error = "Ошибка Lua", kind_blocked = "Действие заблокировано", kind_warning = "Предупреждение",
         selectAll = "Выделить всё (копировать)", remove = "Удалить",
         opt_onlyEzWoW = "Только аддоны EzWoW", opt_showOlder = "Прошлые сеансы",
@@ -123,7 +123,7 @@ local UI_STRINGS = {
     zhCN = {
         subtitle = "本次登录 %d 个错误 · 已保存 %d 个",
         empty = "没有错误。",
-        stack = "调用堆栈", locals = "变量值",
+        stack = "调用堆栈", locals = "变量值", context = "当时情况",
         kind_error = "Lua 错误", kind_blocked = "动作被阻止", kind_warning = "警告",
         selectAll = "全选（复制）", remove = "删除此错误",
         opt_onlyEzWoW = "只看 EzWoW 插件", opt_showOlder = "包括以前的登录",
@@ -140,7 +140,7 @@ local UI_STRINGS = {
     zhTW = {
         subtitle = "本次登入 %d 個錯誤 · 已儲存 %d 個",
         empty = "沒有錯誤。",
-        stack = "呼叫堆疊", locals = "變數值",
+        stack = "呼叫堆疊", locals = "變數值", context = "當時情況",
         kind_error = "Lua 錯誤", kind_blocked = "動作被阻止", kind_warning = "警告",
         selectAll = "全選（複製）", remove = "刪除此錯誤",
         opt_onlyEzWoW = "只看 EzWoW 插件", opt_showOlder = "包括以前的登入",

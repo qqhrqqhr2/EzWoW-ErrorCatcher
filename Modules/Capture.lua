@@ -82,6 +82,10 @@ local function store(entry)
         if old.session == session and old.key == entry.key then
             old.count = (old.count or 1) + 1
             old.last = entry.last
+            if entry.kind == "blocked" and entry.stack then
+                -- the latest one: the same refused call can come from different code
+                old.stack, old.context = entry.stack, entry.context
+            end
             if (not old.stack or old.stack == "") and entry.stack then old.stack = entry.stack end
             if (not old.locals or old.locals == "") and entry.locals then old.locals = entry.locals end
             notify()
@@ -101,8 +105,8 @@ local function clip(text, maxLen)
     return text
 end
 
--- kind: "error" | "blocked" | "warning"
-local function record(kind, message, stack, locals, addon)
+-- kind: "error" | "blocked" | "warning"; context: what was going on (blocked actions)
+local function record(kind, message, stack, locals, addon, context)
     message = clip(safeString(message) or "?", MAX_MESSAGE)
     stack = stack and clip(safeString(stack), MAX_STACK) or nil
     local entry = {
@@ -110,6 +114,7 @@ local function record(kind, message, stack, locals, addon)
         message = message,
         stack = stack,
         locals = locals and clip(safeString(locals), MAX_LOCALS) or nil,
+        context = context and clip(safeString(context), MAX_LOCALS) or nil,
         addon = addon or addonFromText(message) or addonFromText(stack) or "?",
         count = 1,
         first = now(),
@@ -172,6 +177,75 @@ end
 installHandler()
 
 -----------------------------------------------------------------------------
+-- Blocked actions: which code made the call, and what was going on
+-----------------------------------------------------------------------------
+-- The game sends ADDON_ACTION_BLOCKED / FORBIDDEN while the refused call is
+-- still running, so the stack seen from the event handler goes on down to the
+-- code that made it. The function name alone is often "UNKNOWN" (a call made
+-- from C: through pcall or a post hook), so the stack is what tells.
+local OWN_FILE = "EzWoW%-ErrorCatcher[/\\]Modules[/\\]Capture%.lua"
+local function blockedStack()
+    if type(debugstack) ~= "function" then return nil end
+    local ok, stack = pcall(debugstack, 1)
+    if not ok or type(stack) ~= "string" then return nil end
+    local lines = {}
+    for line in stack:gmatch("[^\n]+") do
+        if not line:find(OWN_FILE) then lines[#lines + 1] = line end
+    end
+    if #lines == 0 then return nil end
+    return table.concat(lines, "\n")
+end
+
+-- game windows that change what a click on an item or a button does
+local CONTEXT_WINDOWS = { "MerchantFrame", "AuctionHouseFrame", "BankFrame", "MailFrame", "TradeFrame",
+    "LootFrame", "GossipFrame", "QuestFrame", "ContainerFrameCombinedBags", "StaticPopup1" }
+local function frameName(f)
+    if type(f) ~= "table" then return nil end
+    local ok, name = pcall(function()
+        if type(f.GetDebugName) == "function" then return f:GetDebugName() end
+        return f:GetName()
+    end)
+    name = ok and safeString(name) or nil
+    if not name or name == "" then return nil end
+    if #name > 200 then name = "..." .. name:sub(-200) end
+    return name
+end
+local function blockedContext()
+    local parts = {}
+    local okC, combat = pcall(InCombatLockdown)
+    parts[#parts + 1] = "combat=" .. ((okC and combat) and "yes" or "no")
+    local shown = {}
+    for _, name in ipairs(CONTEXT_WINDOWS) do
+        local f = _G[name]
+        if type(f) == "table" and type(f.IsShown) == "function" then
+            local ok, visible = pcall(f.IsShown, f)
+            if ok and visible == true then shown[#shown + 1] = name end
+        end
+    end
+    if #shown > 0 then parts[#parts + 1] = "shown=" .. table.concat(shown, ",") end
+    local focus
+    if type(GetMouseFoci) == "function" then
+        local ok, list = pcall(GetMouseFoci)
+        if ok and type(list) == "table" then focus = list[1] end
+    elseif type(GetMouseFocus) == "function" then
+        local ok, f = pcall(GetMouseFocus)
+        if ok then focus = f end
+    end
+    local mouse = frameName(focus)
+    if mouse then parts[#parts + 1] = "mouse=" .. mouse end
+    if type(SpellIsTargeting) == "function" then
+        local ok, targeting = pcall(SpellIsTargeting)
+        if ok and targeting == true then parts[#parts + 1] = "targeting" end
+    end
+    local pad = ns.GamePad and ns.GamePad.IsActive
+    if pad then
+        local ok, on = pcall(pad)
+        if ok and on then parts[#parts + 1] = "gamepadUI" end
+    end
+    return table.concat(parts, " | ")
+end
+
+-----------------------------------------------------------------------------
 -- Events: blocked/forbidden actions and Lua warnings
 -----------------------------------------------------------------------------
 local frame = CreateFrame("Frame")
@@ -211,10 +285,9 @@ frame:SetScript("OnEvent", function(_, event, ...)
         return
     end
     -- ADDON_ACTION_BLOCKED / FORBIDDEN / MACRO_ACTION_BLOCKED: (addonName, functionName)
-    -- no stack here: it would only be this event handler's own stack
     local addonName, functionName = ...
     local text = string.format("[%s] %s: %s()", event, safeString(addonName) or "?", safeString(functionName) or "?")
-    record("blocked", text, nil, nil, safeString(addonName))
+    record("blocked", text, blockedStack(), nil, safeString(addonName), blockedContext())
 end)
 
 -----------------------------------------------------------------------------
