@@ -9,7 +9,7 @@ CurseForge summary (KO): Lua 오류·애드온 동작 차단·경고를 한 창�
 
 An error window for WoW Forever. Lua errors, blocked addon actions and warnings are collected in one place, repeated errors are grouped, and the full text (message, stack and locals) is ready to copy into a bug report. It also hides the game's floating issue reporter and the "F6" line on tooltips.
 
-![Error window](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-ErrorCatcher/master/docs/images/ui_en.png)
+![Error window](https://raw.githubusercontent.com/ezwow-addons/EzWoW-ErrorCatcher/master/docs/images/ui_en.png)
 
 *In-game screenshots with the addon set to English. The game client is Korean, so game text such as zone, item and spell names stays Korean. Character and player names and chat text are blurred.*
 
@@ -64,7 +64,7 @@ Languages: English, 한국어, Deutsch, Français, Español, Русский, 简
 
 WoW Forever용 오류 창입니다. Lua 오류·애드온 동작 차단·경고를 한곳에 모으고, 같은 오류는 한 줄로 묶으며, 오류 내용·호출 순서·변수 값을 그대로 복사해 제보할 수 있습니다. 화면에 떠 있는 게임의 이슈 리포터 창과 툴팁의 'F6' 문구도 숨깁니다.
 
-![오류 창](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-ErrorCatcher/master/docs/images/ui_ko.png)
+![오류 창](https://raw.githubusercontent.com/ezwow-addons/EzWoW-ErrorCatcher/master/docs/images/ui_ko.png)
 
 *실제 게임 화면입니다(WoW Forever, 한국어 클라이언트). 캐릭터 · 다른 플레이어 이름과 채팅 내용은 가렸습니다.*
 
